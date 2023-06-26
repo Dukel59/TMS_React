@@ -1,0 +1,36 @@
+.tabs {
+
+  &-active {
+    border-bottom: 2px solid #313037;
+  }
+  &-title {
+    color: #313037;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 80px;
+    margin: 72px 0 47px 0;
+  }
+
+  &-wrap{
+    border-bottom: 1px solid #DADADA;
+    display: flex;
+    gap: 40px;
+
+    &-cell{
+      padding: 24px 40px;
+
+      &-title{
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        color: #313037;
+        cursor: pointer;
+        margin: 0;
+
+        &:hover{
+          color: #2231AA;
+        }
+      }
+    }
+  }
+}
