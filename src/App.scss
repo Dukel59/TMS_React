@@ -1,9 +1,25 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body{
   background-color: #f3f3f3;
 }
 
 .App {
 
+}
+
+.d-none{
+  display: none !important;
+}
+
+.d-flex-reverse-between{
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: space-between;
 }
 
 .btn-custom{

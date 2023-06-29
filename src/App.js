@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import Menu from "./components/menu/menu";
 import Tabs from "./components/tabs/tabs";
@@ -7,6 +7,8 @@ import Textarea from "./components/form/textarea/textarea";
 import {TABS} from "./constants/tabs";
 
 import './App.scss';
+import Posts from "./components/posts/posts";
+import PostItem from "./components/posts/postItem/postItem";
 
 const user = {
     firstName: "Alex",
@@ -22,6 +24,30 @@ const formDefaultValues = {
 function App() {
     const  [activeTab, setActiveTab] = useState(TABS[0]?.key);
     const [formValues, setFormValues] = useState(formDefaultValues);
+    const [ posts, setPosts ] = useState([]);
+
+    useEffect(() => {
+        const getPosts = async() => {
+            try{
+                const urlParams = new URLSearchParams({
+                    limit: 11,
+                    offset: 1
+                });
+                console.log('https://studapi.teachmeskills.by/blog/posts?' + urlParams);
+                const { results: postsResponse } = await fetch('https://studapi.teachmeskills.by/blog/posts?' + urlParams)
+                    .then(response => response.json())
+
+                 setPosts(postsResponse);
+            } catch (e){
+                console.error(e)
+            }
+        }
+
+        getPosts()
+    }, []);
+
+    const items = posts;
+
     const setNewValue = (key, value) => {
         setFormValues({
             ...formValues,
@@ -32,9 +58,10 @@ function App() {
   return (
       <div className="App">
         <Menu user={user}/>
-          <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={TABS}/>
-          <Input value={formValues.name} label={formValues.name.label} onChange={setNewValue}/>
-          <Textarea value={formValues.msg} label={formValues.msg.label} onChange={setNewValue}/>
+          {/*<Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={TABS}/>*/}
+          {/*<Input value={formValues.name} label={formValues.name.label} onChange={setNewValue}/>*/}
+          {/*<Textarea value={formValues.msg} label={formValues.msg.label} onChange={setNewValue}/>*/}
+          <Posts posts={posts}/>
       </div>
   );
 }
