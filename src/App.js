@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import {PostsContext} from "./context/posts";
 
 import Menu from "./components/menu/menu";
 import Tabs from "./components/tabs/tabs";
@@ -8,6 +9,7 @@ import {TABS} from "./constants/tabs";
 
 import './App.scss';
 import Posts from "./components/posts/posts";
+import SearchResult from "./pages/searchResult/searchResult";
 
 const user = {
     firstName: "Alex",
@@ -24,6 +26,7 @@ function App() {
     const  [activeTab, setActiveTab] = useState(TABS[0]?.key);
     const [formValues, setFormValues] = useState(formDefaultValues);
     const [ posts, setPosts ] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         const getPosts = async() => {
@@ -53,13 +56,16 @@ function App() {
     }
 
   return (
-      <div className="App">
-        <Menu user={user}/>
-          {/*<Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={TABS}/>*/}
-          {/*<Input value={formValues.name} label={formValues.name.label} onChange={setNewValue}/>*/}
-          {/*<Textarea value={formValues.msg} label={formValues.msg.label} onChange={setNewValue}/>*/}
-          <Posts posts={posts}/>
-      </div>
+      <PostsContext.Provider value={{posts, search, setSearch}}>
+          <div className="App">
+            <Menu user={user}/>
+              {/*<Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={TABS}/>*/}
+              {/*<Input value={formValues.name} label={formValues.name.label} onChange={setNewValue}/>*/}
+              {/*<Textarea value={formValues.msg} label={formValues.msg.label} onChange={setNewValue}/>*/}
+
+              <SearchResult />
+          </div>
+      </PostsContext.Provider>
   );
 }
 
