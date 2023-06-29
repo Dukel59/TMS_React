@@ -8,7 +8,6 @@ import {TABS} from "./constants/tabs";
 
 import './App.scss';
 import Posts from "./components/posts/posts";
-import PostItem from "./components/posts/postItem/postItem";
 
 const user = {
     firstName: "Alex",
@@ -45,8 +44,6 @@ function App() {
 
         getPosts()
     }, []);
-
-    const items = posts;
 
     const setNewValue = (key, value) => {
         setFormValues({
