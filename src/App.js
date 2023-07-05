@@ -1,17 +1,14 @@
 import {useEffect, useState} from "react";
 import {PostsContext} from "./context/posts";
+import {ThemeContext} from "./context/theme";
 
 import RoutesComponent from "./routes";
 import Menu from "./components/menu/menu";
-import Tabs from "./components/tabs/tabs";
-import Input from "./components/form/input/input";
-import Textarea from "./components/form/textarea/textarea";
+import ThemeToggle, {THEME} from "./components/themeToggle/themeToggle";
+
 import {TABS} from "./constants/tabs";
 
 import './App.scss';
-import Posts from "./components/posts/posts";
-import SearchResult from "./pages/searchResult/searchResult";
-import {Route} from "react-router-dom";
 
 const user = {
     firstName: "Alex",
@@ -29,6 +26,7 @@ function App() {
     const [formValues, setFormValues] = useState(formDefaultValues);
     const [ posts, setPosts ] = useState([]);
     const [search, setSearch] = useState("");
+    const [theme, setTheme] = useState(THEME.light)
 
     useEffect(() => {
         const getPosts = async() => {
@@ -58,16 +56,16 @@ function App() {
     }
 
   return (
-      <PostsContext.Provider value={{posts, search, setSearch}}>
-          <div className="App">
-            <Menu user={user}/>
-              {/*<Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={TABS}/>*/}
-              {/*<Input value={formValues.name} label={formValues.name.label} onChange={setNewValue}/>*/}
-              {/*<Textarea value={formValues.msg} label={formValues.msg.label} onChange={setNewValue}/>*/}
-                <RoutesComponent />
+      <ThemeContext.Provider value={[theme, setTheme]}>
+          <PostsContext.Provider value={{posts, search, setSearch}}>
+              <div className={`App App--${theme}`}>
+                  <Menu user={user}/>
+                  <ThemeToggle />
 
-          </div>
-      </PostsContext.Provider>
+                  <RoutesComponent />
+              </div>
+          </PostsContext.Provider>
+      </ThemeContext.Provider>
   );
 }
 

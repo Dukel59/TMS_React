@@ -144,6 +144,7 @@
         text-align: center;
         background-color: #ffffff;
         padding: 30px 114px;
+        border: none;
 
         &:first-child{
           border-bottom: 1px solid #DADADA;;
@@ -173,9 +174,10 @@
   color: #313037;
 }
 
-.d-flex-reverse-between{
-  display: flex;
-  gap: 32px;
-  flex-flow: row-reverse;
-  justify-content: space-between;
+.icon{
+  &--dark *{
+     fill:#ffffff;
+  }
 }
+
+

@@ -10,6 +10,11 @@ body{
 
 .App {
 
+  &--dark {
+    background: #606060;
+    color: #ffffff;
+  }
+
 }
 
 .d-none{
