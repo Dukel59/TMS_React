@@ -17,9 +17,9 @@ const Menu = ({user}) => {
         <div className="menu">
             <MenuButton/>
 
-            <NavLink to={ROUTES.signUP}>Go to sign up</NavLink>
+            {/*<NavLink to={ROUTES.signUP}>Go to sign up</NavLink>*/}
 
-            <button onClick={goTosignUp}>GO to sign up</button>
+            {/*<button onClick={goTosignUp}>GO to sign up</button>*/}
 
             <div className="menu-search-user">
                 <MenuSearch/>

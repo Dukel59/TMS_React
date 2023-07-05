@@ -14,18 +14,18 @@ const Posts = () => {
     return (
         <div className="posts__container">
             <div className="posts-container__left">
-                <PostItem post={posts[0]} size={"large"} />
+                <PostItem post={posts[0]} size="large" />
                 <div className="posts-container-left__medium">
                     {
                         posts.slice(1, 3).map((post) => (
-                            <PostItem key={post.id} post={post} size={'medium'} />
+                            <PostItem key={post.id} post={post} size="medium"/>
                         ))
                     }
                 </div>
                 <div className="posts-container-left__medium">
                     {
                         posts.slice(3, 5).map((post) => (
-                            <PostItem key={post.id} post={post} size={'medium'} />
+                            <PostItem key={post.id} post={post} size="medium"/>
                         ))
                     }
                 </div>
@@ -33,7 +33,7 @@ const Posts = () => {
             <div className="posts-container__right">
                 {
                     posts.slice(5, 11).map((post) => (
-                        <PostItem key={post.id} post={post} size={'small'} />
+                        <PostItem key={post.id} post={post} size="small" />
                     ))
                 }
             </div>

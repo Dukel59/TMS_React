@@ -8,7 +8,7 @@ import {useState} from "react";
 
 import './postItem.scss'
 
-const PostItem = ({ post, size }) =>  {
+const PostItem = ({ post, size, result }) =>  {
     const [isSelected, setIsSelected] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
@@ -16,7 +16,7 @@ const PostItem = ({ post, size }) =>  {
 
     return (
         <div className={`post-item__container-${size}`}>
-            <div className={`post-item__body ${size !== 'medium' ? 'd-flex-reverse-between' : ''}`}>
+            <div className={`post-item__body ${!result ? `post-item__body-${size}` : ''}`}>
                 <img className={`post-item-body__img-${size}`} src={post?.image} alt="post image"/>
                 <div className="post-item-body__text">
                     <p className="post-item-body-text__date">{post?.date}</p>

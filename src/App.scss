@@ -16,13 +16,6 @@ body{
   display: none !important;
 }
 
-.d-flex-reverse-between{
-  display: flex;
-  flex-flow: row-reverse;
-  justify-content: space-between;
-  gap: 32px;
-}
-
 .btn-custom{
   background-color: transparent;
   outline: none;
