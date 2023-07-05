@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {PostsContext} from "./context/posts";
 
+import RoutesComponent from "./routes";
 import Menu from "./components/menu/menu";
 import Tabs from "./components/tabs/tabs";
 import Input from "./components/form/input/input";
@@ -10,6 +11,7 @@ import {TABS} from "./constants/tabs";
 import './App.scss';
 import Posts from "./components/posts/posts";
 import SearchResult from "./pages/searchResult/searchResult";
+import {Route} from "react-router-dom";
 
 const user = {
     firstName: "Alex",
@@ -62,8 +64,8 @@ function App() {
               {/*<Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={TABS}/>*/}
               {/*<Input value={formValues.name} label={formValues.name.label} onChange={setNewValue}/>*/}
               {/*<Textarea value={formValues.msg} label={formValues.msg.label} onChange={setNewValue}/>*/}
+                <RoutesComponent />
 
-              <SearchResult />
           </div>
       </PostsContext.Provider>
   );

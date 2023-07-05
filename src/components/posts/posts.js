@@ -1,7 +1,11 @@
 import './posts.scss'
 import PostItem from "./postItem/postItem";
+import {useContext} from "react";
+import {PostsContext} from "../../context/posts";
 
-const Posts = ({ posts }) => {
+const Posts = () => {
+
+    const { posts } = useContext(PostsContext)
 
     if(posts.length === 0) {
         return null
