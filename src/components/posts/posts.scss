@@ -1,0 +1,39 @@
+.posts__container{
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  gap: 50px;
+  max-width: 80vw;
+  justify-content: center;
+}
+
+.posts-container{
+
+  &__left{
+
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+
+  }
+
+  &-left{
+
+    &__medium{
+
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+
+    }
+
+  }
+
+  &__right{
+
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+  }
+}
