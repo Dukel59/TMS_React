@@ -4,6 +4,7 @@ import { ReactComponent as SearchIcon } from '../../../assetes/svg/searchIcon.sv
 import './menuSearch.scss'
 import {useContext, useState} from "react";
 import {PostsContext} from "../../../context/posts";
+import Input from "../../form/input/input";
 const MenuSearch = () => {
 
     const [isInputShown, setIsInputShown] = useState(false);
@@ -12,9 +13,9 @@ const MenuSearch = () => {
     return (
         <div className="menuSearch">
             {isInputShown &&
-                (<input
+                (<Input
                     value={search}
-                    onChange={(event) => setSearch(event.target.value)}
+                    onChange={(event) => setSearch(event)}
                 />)}
             <button onClick={() => setIsInputShown(!isInputShown)} className="btn-custom">
                 <SearchIcon />

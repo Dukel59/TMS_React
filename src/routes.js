@@ -4,6 +4,7 @@ import Landing from "./pages/landing/landing";
 import Title from "./components/title/title";
 import Empty from "./pages/empty/Empty";
 import Posts from "./components/posts/posts";
+import SignUp from "./pages/signUp/signUp";
 
 const RoutesComponent = () => {
     return (
@@ -11,6 +12,7 @@ const RoutesComponent = () => {
             <Route path={ROUTES.main}>
                 <Route index element={<Landing />}></Route>
                 <Route path={ROUTES.posts} element={<Posts />} />
+                <Route path={ROUTES.signUp} element={<SignUp />}/>
             </Route>
             <Route path="*" element={<Empty />} />
         </Routes>

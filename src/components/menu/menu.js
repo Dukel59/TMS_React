@@ -9,6 +9,7 @@ import {ROUTES} from "../../constants/routes";
 import {useCallback} from "react";
 
 const Menu = ({user}) => {
+
     const navigate = useNavigate();
     const goToPosts = useCallback(() => {
         navigate(ROUTES.posts)
@@ -17,6 +18,7 @@ const Menu = ({user}) => {
     const goToMain = useCallback(() => {
         navigate(ROUTES.main)
     }, [])
+
     return (
         <div className="menu">
             <MenuButton/>

@@ -1,0 +1,19 @@
+.btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  padding: 16px 32px;
+
+  &--primary {
+    background-color: #2231AA;
+    color: #ffffff;
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+}

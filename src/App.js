@@ -60,7 +60,7 @@ function App() {
           <PostsContext.Provider value={{posts, search, setSearch}}>
               <div className={`App App--${theme}`}>
                   <Menu user={user}/>
-                  <ThemeToggle />
+                  {/*<ThemeToggle />*/}
 
                   <RoutesComponent />
               </div>
