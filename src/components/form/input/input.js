@@ -1,7 +1,7 @@
 import "./input.scss"
 const Input = ({
        value: inputValue,
-       onChange = () => {},
+       onChange,
        disabled,
        error,
        errorMsg,

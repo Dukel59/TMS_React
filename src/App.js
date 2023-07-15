@@ -4,11 +4,12 @@ import {ThemeContext} from "./context/theme";
 
 import RoutesComponent from "./routes";
 import Menu from "./components/menu/menu";
-import ThemeToggle, {THEME} from "./components/themeToggle/themeToggle";
 
 import {TABS} from "./constants/tabs";
 
 import './App.scss';
+import usePosts from "./hooks/usePosts";
+import {useSelector} from "react-redux";
 
 const user = {
     firstName: "Alex",
@@ -24,29 +25,9 @@ const formDefaultValues = {
 function App() {
     const  [activeTab, setActiveTab] = useState(TABS[0]?.key);
     const [formValues, setFormValues] = useState(formDefaultValues);
-    const [ posts, setPosts ] = useState([]);
+    const {posts, setPosts}  = usePosts();
     const [search, setSearch] = useState("");
-    const [theme, setTheme] = useState(THEME.light)
-
-    useEffect(() => {
-        const getPosts = async() => {
-            try{
-                const urlParams = new URLSearchParams({
-                    limit: 11,
-                    offset: 1
-                });
-                console.log('https://studapi.teachmeskills.by/blog/posts?' + urlParams);
-                const { results: postsResponse } = await fetch('https://studapi.teachmeskills.by/blog/posts?' + urlParams)
-                    .then(response => response.json())
-
-                 setPosts(postsResponse);
-            } catch (e){
-                console.error(e)
-            }
-        }
-
-        getPosts()
-    }, []);
+    const {theme} = useSelector(state => state.theme);
 
     const setNewValue = (key, value) => {
         setFormValues({
@@ -56,16 +37,12 @@ function App() {
     }
 
   return (
-      <ThemeContext.Provider value={[theme, setTheme]}>
-          <PostsContext.Provider value={{posts, search, setSearch}}>
               <div className={`App App--${theme}`}>
                   <Menu user={user}/>
                   {/*<ThemeToggle />*/}
 
                   <RoutesComponent />
               </div>
-          </PostsContext.Provider>
-      </ThemeContext.Provider>
   );
 }
 

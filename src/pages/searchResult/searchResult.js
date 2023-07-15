@@ -1,10 +1,10 @@
-import {useContext, useMemo} from "react";
-import {PostsContext} from "../../context/posts";
+import { useMemo} from "react";
 import PostItem from "../../components/posts/postItem/postItem";
 import './searchResult.scss'
+import {useSelector} from "react-redux";
 
 const SearchResult = () => {
-    const {posts, search} = useContext(PostsContext);
+    const {posts, search} = useSelector(state => state.posts);
     const filteredPosts = useMemo(() => {
         if (!search) {
             return posts;

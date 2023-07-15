@@ -7,6 +7,7 @@ import MenuSearch from "./menuSearch/menuSearch";
 import './menu.scss'
 import {ROUTES} from "../../constants/routes";
 import {useCallback} from "react";
+import ThemeToggle from "../themeToggle/themeToggle";
 
 const Menu = ({user}) => {
 
@@ -29,6 +30,7 @@ const Menu = ({user}) => {
             {/*<button onClick={goToPosts}>GO to posts</button>*/}
 
             <div className="menu-search-user">
+                <ThemeToggle />
                 <MenuSearch/>
                 <UserProfile user={user}/>
             </div>

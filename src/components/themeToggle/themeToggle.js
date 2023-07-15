@@ -1,16 +1,12 @@
-import {useContext, useMemo} from "react";
+import {useMemo} from "react";
 
-import { ThemeContext } from "../../context/theme";
 
 import './themeToggle.scss';
-
-export const THEME = {
-    light: 'light',
-    dark: 'dark'
-}
+import {useTheme} from "../../hooks/useTheme";
+import {THEME} from "../../constants/themes";
 
 const ThemeToggle = () => {
-    const [ theme, setTheme ] = useContext(ThemeContext);
+    const {theme, setTheme}  = useTheme();
     const isLightTheme = useMemo(() => {
         return theme === THEME.light;
     }, [ theme ])

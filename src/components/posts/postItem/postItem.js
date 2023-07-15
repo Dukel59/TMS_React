@@ -4,17 +4,19 @@ import {ReactComponent as BookmarkIcon} from "../../../assetes/svg/bookmarkIcon.
 import {ReactComponent as BookmarkIconActive} from "../../../assetes/svg/bookmarkIconActive.svg";
 import {ReactComponent as EllipsisIcon} from "../../../assetes/svg/ellipsisIcon.svg";
 
-import {useContext, useState} from "react";
+import { useState } from "react";
 
 import './postItem.scss'
-import {ThemeContext} from "../../../context/theme";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const PostItem = ({ post, size, result }) =>  {
     const [isSelected, setIsSelected] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
     const [dislikeCount, setDislikeCount] = useState(0);
-    const [theme] = useContext(ThemeContext)
+    const {theme} = useSelector(state => state.theme);
+    const navigate = useNavigate();
 
     return (
         <div className={`post-item__container-${size}`}>
@@ -22,7 +24,12 @@ const PostItem = ({ post, size, result }) =>  {
                 <img className={`post-item-body__img-${size}`} src={post?.image} alt="post image"/>
                 <div className="post-item-body__text">
                     <p className="post-item-body-text__date">{post?.date}</p>
-                    <p className={`post-item-body-text__title App--${theme}`}>{post?.title}</p>
+                    <p
+                        className={`post-item-body-text__title App--${theme}`}
+                        onClick={() => navigate(`${post.id}`)}
+                    >
+                        {post?.title}
+                    </p>
                     <p className={`post-item-body-text__description ${size !== 'large' ? 'd-none' : ''}`}>{post?.description}</p>
                 </div>
             </div>
