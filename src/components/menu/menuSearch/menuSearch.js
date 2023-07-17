@@ -2,19 +2,22 @@ import { ReactComponent as SearchIcon } from '../../../assetes/svg/searchIcon.sv
 
 
 import './menuSearch.scss'
-import {useContext, useState} from "react";
-import {PostsContext} from "../../../context/posts";
+import {useState} from "react";
+import Input from "../../form/input/input";
+import {useDispatch, useSelector} from "react-redux";
+import {setSearch} from "../../../stores/posts";
 const MenuSearch = () => {
 
     const [isInputShown, setIsInputShown] = useState(false);
-    const {search, setSearch} = useContext(PostsContext);
+    const {search} = useSelector(state => state.posts);
+    const dispatch = useDispatch();
 
     return (
         <div className="menuSearch">
             {isInputShown &&
-                (<input
+                (<Input
                     value={search}
-                    onChange={(event) => setSearch(event.target.value)}
+                    onChange={(event) => dispatch(setSearch(event))}
                 />)}
             <button onClick={() => setIsInputShown(!isInputShown)} className="btn-custom">
                 <SearchIcon />

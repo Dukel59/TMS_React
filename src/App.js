@@ -1,17 +1,15 @@
 import {useEffect, useState} from "react";
 import {PostsContext} from "./context/posts";
+import {ThemeContext} from "./context/theme";
 
 import RoutesComponent from "./routes";
 import Menu from "./components/menu/menu";
-import Tabs from "./components/tabs/tabs";
-import Input from "./components/form/input/input";
-import Textarea from "./components/form/textarea/textarea";
+
 import {TABS} from "./constants/tabs";
 
 import './App.scss';
-import Posts from "./components/posts/posts";
-import SearchResult from "./pages/searchResult/searchResult";
-import {Route} from "react-router-dom";
+import usePosts from "./hooks/usePosts";
+import {useSelector} from "react-redux";
 
 const user = {
     firstName: "Alex",
@@ -27,28 +25,9 @@ const formDefaultValues = {
 function App() {
     const  [activeTab, setActiveTab] = useState(TABS[0]?.key);
     const [formValues, setFormValues] = useState(formDefaultValues);
-    const [ posts, setPosts ] = useState([]);
+    const {posts, setPosts}  = usePosts();
     const [search, setSearch] = useState("");
-
-    useEffect(() => {
-        const getPosts = async() => {
-            try{
-                const urlParams = new URLSearchParams({
-                    limit: 11,
-                    offset: 1
-                });
-                console.log('https://studapi.teachmeskills.by/blog/posts?' + urlParams);
-                const { results: postsResponse } = await fetch('https://studapi.teachmeskills.by/blog/posts?' + urlParams)
-                    .then(response => response.json())
-
-                 setPosts(postsResponse);
-            } catch (e){
-                console.error(e)
-            }
-        }
-
-        getPosts()
-    }, []);
+    const {theme} = useSelector(state => state.theme);
 
     const setNewValue = (key, value) => {
         setFormValues({
@@ -58,16 +37,12 @@ function App() {
     }
 
   return (
-      <PostsContext.Provider value={{posts, search, setSearch}}>
-          <div className="App">
-            <Menu user={user}/>
-              {/*<Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={TABS}/>*/}
-              {/*<Input value={formValues.name} label={formValues.name.label} onChange={setNewValue}/>*/}
-              {/*<Textarea value={formValues.msg} label={formValues.msg.label} onChange={setNewValue}/>*/}
-                <RoutesComponent />
+              <div className={`App App--${theme}`}>
+                  <Menu user={user}/>
+                  {/*<ThemeToggle />*/}
 
-          </div>
-      </PostsContext.Provider>
+                  <RoutesComponent />
+              </div>
   );
 }
 

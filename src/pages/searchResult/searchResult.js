@@ -1,9 +1,10 @@
-import {useContext, useMemo} from "react";
-import {PostsContext} from "../../context/posts";
+import { useMemo} from "react";
 import PostItem from "../../components/posts/postItem/postItem";
+import './searchResult.scss'
+import {useSelector} from "react-redux";
 
 const SearchResult = () => {
-    const {posts, search} = useContext(PostsContext);
+    const {posts, search} = useSelector(state => state.posts);
     const filteredPosts = useMemo(() => {
         if (!search) {
             return posts;
@@ -12,11 +13,14 @@ const SearchResult = () => {
     }, [search, posts]);
 
     return (
-        <>
-            {filteredPosts.map((post) => (
-                <PostItem key={post.id} post={post} size="small" />
-            ))}
-        </>
+        <div className="sr__container">
+            <h1 className="sr-container__title">Search Result: { search }</h1>
+            <div className="sr-container__result-container">
+                {filteredPosts.map((post) => (
+                    <PostItem key={post.id} post={post} size="small" result="true" />
+                ))}
+            </div>
+        </div>
     )
 }
 export default SearchResult;

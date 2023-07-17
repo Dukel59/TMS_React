@@ -10,17 +10,15 @@ body{
 
 .App {
 
+  &--dark {
+    background: #606060;
+    color: #ffffff;
+  }
+
 }
 
 .d-none{
   display: none !important;
-}
-
-.d-flex-reverse-between{
-  display: flex;
-  flex-flow: row-reverse;
-  justify-content: space-between;
-  gap: 32px;
 }
 
 .btn-custom{

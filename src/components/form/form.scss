@@ -1,0 +1,49 @@
+.form{
+
+  &__container{
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 72px auto;
+    padding: 40px;
+    border: 1px solid #DADADA;
+    max-width: 624px;
+
+  }
+
+  &-container{
+
+    &__footer{
+
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+
+    }
+
+    &-footer{
+
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+
+      &__text{
+
+        color: #8D8E97;
+
+      }
+
+      &__link{
+
+        text-decoration: none;
+
+      }
+
+    }
+
+  }
+
+}

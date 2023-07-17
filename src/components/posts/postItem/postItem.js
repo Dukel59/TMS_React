@@ -4,40 +4,49 @@ import {ReactComponent as BookmarkIcon} from "../../../assetes/svg/bookmarkIcon.
 import {ReactComponent as BookmarkIconActive} from "../../../assetes/svg/bookmarkIconActive.svg";
 import {ReactComponent as EllipsisIcon} from "../../../assetes/svg/ellipsisIcon.svg";
 
-import {useState} from "react";
+import { useState } from "react";
 
 import './postItem.scss'
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
-const PostItem = ({ post, size }) =>  {
+const PostItem = ({ post, size, result }) =>  {
     const [isSelected, setIsSelected] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
     const [dislikeCount, setDislikeCount] = useState(0);
+    const {theme} = useSelector(state => state.theme);
+    const navigate = useNavigate();
 
     return (
         <div className={`post-item__container-${size}`}>
-            <div className={`post-item__body ${size !== 'medium' ? 'd-flex-reverse-between' : ''}`}>
+            <div className={`post-item__body ${!result ? `post-item__body-${size}` : ''}`}>
                 <img className={`post-item-body__img-${size}`} src={post?.image} alt="post image"/>
                 <div className="post-item-body__text">
                     <p className="post-item-body-text__date">{post?.date}</p>
-                    <p className="post-item-body-text__title">{post?.title}</p>
+                    <p
+                        className={`post-item-body-text__title App--${theme}`}
+                        onClick={() => navigate(`${post.id}`)}
+                    >
+                        {post?.title}
+                    </p>
                     <p className={`post-item-body-text__description ${size !== 'large' ? 'd-none' : ''}`}>{post?.description}</p>
                 </div>
             </div>
             <div className="post-item__footer">
                 <div className="post-item-footer__group">
                     <button
-                        className="post-item-footer-group__button btn-custom"
+                        className={`post-item-footer-group__button btn-custom App--${theme}`}
                         onClick={() => {likeCount > 0 ? setLikeCount(0) : setLikeCount(1)}}
                     >
-                        <LikeIcon />
+                        <LikeIcon className={`icon--${theme}`}/>
                     </button>
                     <span className={`post-item-footer-group__span ${likeCount === 0 ? 'd-none' : ''}`}>{likeCount}</span>
                     <button
                         className="post-item-footer-group__button btn-custom"
                         onClick={() => {dislikeCount > 0 ? setDislikeCount(0) : setDislikeCount(1)}}
                     >
-                        <DislikeIcon />
+                        <DislikeIcon className={`icon--${theme}`}/>
                     </button>
                     <span className={`post-item-footer-group__span ${dislikeCount === 0 ? 'd-none' : ''}`}>{dislikeCount}</span>
                 </div>
@@ -46,18 +55,18 @@ const PostItem = ({ post, size }) =>  {
                         className="post-item-footer-group__button btn-custom btn-bookmark"
                         onClick={() =>(setIsSelected(!isSelected))}
                     >
-                        {isSelected ? <BookmarkIconActive/> : <BookmarkIcon/>}
+                        {isSelected ? <BookmarkIconActive className={`icon--${theme}`}/> : <BookmarkIcon className={`icon--${theme}`}/>}
                     </button>
                     <button
                         className="post-item-footer-group__button btn-custom"
                         onClick={() =>(setIsClicked(!isClicked))}
                     >
-                        <EllipsisIcon />
+                        <EllipsisIcon className={`icon--${theme}`}/>
                     </button>
 
-                    <div className={`post-item-footer-group__submenu ${isClicked ? '' : 'd-none'}`}>
-                        <button className="post-item-footer-group-submenu__button btn-custom">Edit</button>
-                        <button className="post-item-footer-group-submenu__button btn-custom">Delete</button>
+                    <div className={`post-item-footer-group__submenu ${isClicked ? '' : 'd-none'} App--${theme}`}>
+                        <button className="post-item-footer-group-submenu__button">Edit</button>
+                        <button className="post-item-footer-group-submenu__button">Delete</button>
                     </div>
                 </div>
             </div>
